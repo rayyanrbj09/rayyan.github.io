@@ -116,7 +116,9 @@ body:hover .cursor { transform: translate(-50%, -50%) scale(1.2); }
 .hero-content {
   position: relative; z-index: 1; display: grid;
   grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-  max-width: 1200px; margin: 0 auto; width: 100%;
+   width: 90vw;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Terminal */
@@ -187,7 +189,11 @@ body:hover .cursor { transform: translate(-50%, -50%) scale(1.2); }
 /* ── Sections ─────────────────────────────────────────────── */
 .section { padding: 6rem 4rem; }
 .section-dark { background: var(--bg2); }
-.container { max-width: 1200px; margin: 0 auto; }
+.container {
+  width: 90vw;
+  max-width: 1400px; /* optional, keeps it clean on big screens */
+  margin: 0 auto;
+}
 
 .section-header {
   display: flex; align-items: center; gap: 1rem; margin-bottom: 4rem;
