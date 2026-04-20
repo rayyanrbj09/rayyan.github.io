@@ -40,6 +40,13 @@ EDUCATION = [
         "location": "Hyderabad",
         "year": "2022 – 2026 (Expected)",
     },
+    {
+        "degree" : "MPC (Intermediate)",
+        "institution": "Sri Chaitanya Junior College",
+        "location" : "Hyderabad",
+        "year": "2020 – 2022",
+        "percentage": "93.3%",  
+    }
 ]
 
 PROJECTS = [
