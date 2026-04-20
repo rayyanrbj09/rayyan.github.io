@@ -41,12 +41,17 @@ EDUCATION = [
         "year": "2022 – 2026 (Expected)",
     },
     {
-        "degree" : "MPC (Intermediate)",
+        "degree" : "MPC (Intermediate) - 93.3 %",
         "institution": "Sri Chaitanya Junior College",
         "location" : "Hyderabad",
         "year": "2020 – 2022",
-        "percentage": "93.3%",  
-    }
+    },
+    {
+        "degree" : "SSC - 10 CGPA",
+        "institution": "MS Future School",
+        "location" : "Hyderabad",
+        "year": "2019 – 2020",
+    },
 ]
 
 PROJECTS = [
