@@ -9,7 +9,9 @@ PROFILE = {
     "name": "Mohd Rayyan",
     "full_name": "Mohd Rayyan Bin Mohd Jaweed",
     "title": "Data Scientist Intern",
-    "tagline": "Building data-driven AI systems with a focus on finance, analytics, and scalable ML pipelines.",
+    "tagline": """Machine Learning Developer focused on building real-world AI systems.
+                    I work on end-to-end ML pipelines — from data preprocessing and model building to deployment using Python, PyTorch, and Streamlit.
+                Currently exploring scalable AI systems, model optimization, and intelligent applications.""",
     "email": "rayyan.rbj0409@gmail.com",
     "phone": "+91 8106931514",
     "location": "Hyderabad, India",
