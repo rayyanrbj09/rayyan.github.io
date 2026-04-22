@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 PROFILE = {
     "name": "Mohd Rayyan",
-    "full_name": "Mohd Rayyan Bin Mohd Jaweed",
+    "full_name": "Mohd Rayyan Bin Mohd Jaweed .", 
     "title": "Data Scientist Intern",
     "tagline": """Machine Learning Developer focused on building real-world AI systems.
                     I work on end-to-end ML pipelines — from data preprocessing and model building to deployment using Python, PyTorch, and Streamlit.
