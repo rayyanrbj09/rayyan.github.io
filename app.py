@@ -28,11 +28,13 @@ PROFILE = {
 SKILLS = {
     "Programming & Core": ["Python", "SQL", "Jupyter Notebook"],
     "Data Analysis": ["Pandas", "Polars", "NumPy"],
+    "ML & AI": ["Scikit-learn", "PyTorch", "TensorFlow", "Transformers"],
+    "Deep Learning": ["CNNs", "RNNs", "Transformers"],
     "Visualization": ["Matplotlib", "Seaborn"],
     "Statistics": ["EDA", "Feature Engineering", "Correlation Analysis", "Hypothesis Testing", "Outlier Detection"],
     "Machine Learning": ["Model Training", "Evaluation", "ML APIs"],
     "Frameworks": ["Flask", "FastAPI"],
-    "Cloud & Tools": ["AWS (S3, EC2, SageMaker, Bedrock, RDS)", "Git", "GitHub"],
+    "Cloud & Tools": ["AWS (S3, EC2, SageMaker, Bedrock, RDS, lambda)", "Git", "GitHub"],
     "Databases": ["MySQL", "PostgreSQL"],
 }
 EDUCATION = [
@@ -103,10 +105,10 @@ EXPERIENCE = [
             "performed exploratory data analysis, and developed machine learning workflows for analytics."
         ),
         "highlights": [
-            "Built preprocessing pipelines for transactional financial data",
-            "Performed EDA on trading and ledger datasets",
-            "Worked on PnL validation and margin interest calculations",
-            "Improved data pipeline accuracy and reporting efficiency",
+            "Validated and reconciled financial metrics across datasets - ensuring data integrity, reducing data discrepancies, and improving reporting accuracy. ",
+            "Engineered high quality data pipelines for financial datasets, optimizing data processing and enabling efficient analytics.    ",
+            "Cutting preprocessing time by 33% through optimized data transformations and parallel processing techniques.",
+            "Applied statistical analysis and feature engineering to enhance model performance, improving predictive accuracy by 15%.",
         ],
     },
     {
