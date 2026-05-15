@@ -6,7 +6,7 @@ app = Flask(__name__)
 # ── Portfolio Data ──────────────────────────────────────────────────────────
 
 PROFILE = {
-    "name": "Mohd Rayyan",
+    "name": "Rayyan Bin Mohd Jaweed",
     "full_name": "Mohd Rayyan Bin Mohd Jaweed .", 
     "title": "Data Scientist Intern",
     "tagline": """Machine Learning Developer focused on building real-world AI systems.
