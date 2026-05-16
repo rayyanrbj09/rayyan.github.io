@@ -13,7 +13,7 @@
       --bg2:     #0f0f18;
       --bg3:     #171724;
       --border:  rgba(255,255,255,0.06);
-      --text:    #dddde8;
+      --text:    #f5f5fd;
       --text2:   #7f7f9a;
       --text3:   #4a4a66;
       --accent:  #00e5a8;
@@ -21,7 +21,7 @@
       --tag-bg:  rgba(0,229,168,0.07);
       --card:    #111120;
       --glow:    0 0 24px rgba(0,229,168,0.10);
-      --radius:  10px;
+      --radius:  12px;
       --mono:    'IBM Plex Mono', monospace;
       --sans:    'IBM Plex Sans', sans-serif;
       --sidebar-w: 240px;
@@ -72,32 +72,43 @@
     .shell {
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
     }
 
     /* ══════════════════════════════════════════════════════
-       SIDEBAR (desktop)
+       DESKTOP TOP NAVBAR
     ══════════════════════════════════════════════════════ */
     .sidebar {
       position: sticky;
       top: 0;
-      height: 100vh;
-      border-right: 1px solid var(--border);
-      background: var(--bg2);
-      display: flex;
-      flex-direction: column;
-      padding: 28px 20px 24px;
-      overflow-y: auto;
+      width: 100%;
+      background: rgba(9,9,16,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
       transition: background 0.3s, border-color 0.3s;
-      z-index: 10;
+    }
+    [data-theme="light"] .sidebar {
+      background: rgba(245,244,240,0.88);
+    }
+    .sidebar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 40px;
+      height: 58px;
     }
     .logo-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 26px;
+      gap: 0;
+      margin-right: 32px;
+      flex-shrink: 0;
     }
     .logo {
       font-family: var(--mono);
@@ -105,13 +116,14 @@
       font-size: 15px;
       color: var(--accent);
       letter-spacing: -0.3px;
+      white-space: nowrap;
     }
     .logo span {
-      display: block;
-      font-size: 10px;
+      display: inline;
+      font-size: 11px;
       font-weight: 400;
       color: var(--text3);
-      margin-top: 2px;
+      margin-left: 6px;
       letter-spacing: 0.4px;
     }
     .theme-toggle {
@@ -128,73 +140,46 @@
       font-family: var(--mono);
       transition: all 0.2s;
       white-space: nowrap;
+      margin-left: auto;
+      flex-shrink: 0;
     }
     .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Profile mini card */
-    .profile-mini {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--sans);
-      font-size: 18px; font-weight: 700; color: #fff;
-      margin-bottom: 11px;
-    }
-    .profile-name { font-family: var(--sans); font-weight: 600; font-size: 13px; color: var(--text); line-height: 1.35; }
-    .profile-role { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-top: 4px; }
-    .profile-loc  { font-size: 11px; color: var(--text3); margin-top: 4px; }
+    /* Profile mini card — hidden on desktop navbar */
+    .profile-mini { display: none; }
+    .avatar { display: none; }
 
-    /* Desktop nav */
-    .nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    /* Desktop nav — horizontal pill row */
+    .nav {
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      flex: 1;
+    }
     .nav-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 11px; border-radius: 7px;
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 7px;
       cursor: pointer; color: var(--text2);
-      font-family: var(--mono); font-size: 12px;
+      font-family: var(--mono); font-size: 11px;
       transition: all 0.18s;
       border: 1px solid transparent;
       user-select: none;
+      white-space: nowrap;
     }
-    .nav-item .ni-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+    .nav-item .ni-icon { font-size: 13px; flex-shrink: 0; }
     .ni-badge {
-      margin-left: auto; background: var(--bg3);
+      background: var(--bg3);
       border-radius: 9px; padding: 1px 6px;
-      font-size: 10px; color: var(--text3);
+      font-size: 9px; color: var(--text3);
     }
     .nav-item:hover { background: var(--bg3); color: var(--text); }
     .nav-item.active { background: var(--tag-bg); border-color: rgba(0,229,168,0.22); color: var(--accent); }
     .nav-item.active .ni-badge { background: var(--accent); color: var(--bg); }
 
-    /* Social + status */
-    .social-row { display: flex; gap: 7px; margin-top: 20px; }
-    .social-btn {
-      flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
-      padding: 7px; border-radius: 7px;
-      border: 1px solid var(--border); color: var(--text2);
-      font-size: 10px; font-family: var(--mono);
-      text-decoration: none; transition: all 0.2s; background: var(--bg3);
-    }
-    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .status-bar {
-      margin-top: 12px; padding: 8px 11px;
-      background: rgba(0,229,168,0.05);
-      border: 1px solid rgba(0,229,168,0.13);
-      border-radius: 7px; font-size: 10px;
-      font-family: var(--mono); color: var(--accent);
-      display: flex; align-items: center; gap: 7px;
-    }
-    .status-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); animation: pulse 2.2s infinite; flex-shrink: 0;
-    }
+    /* Social + status — hidden from top nav, not needed */
+    .social-row { display: none; }
+    .status-bar { display: none; }
+    .status-dot { display: none; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     /* ══════════════════════════════════════════════════════
@@ -228,21 +213,25 @@
     .mobile-nav-inner { display: flex; height: 100%; align-items: stretch; }
     .mob-nav-item {
       flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 3px;
-      cursor: pointer; color: var(--text3);
-      font-family: var(--mono); font-size: 9px;
+      align-items: center; justify-content: center; gap: 4px;
+      cursor: pointer; color: rgba(255,255,255,0.5);
+      font-family: var(--mono); font-size: 9.5px;
+      font-weight: 500; letter-spacing: 0.2px;
       transition: color 0.18s; padding: 6px 2px;
       border: none; background: none;
       -webkit-tap-highlight-color: transparent;
     }
-    .mob-icon { font-size: 17px; line-height: 1; }
+    [data-theme="light"] .mob-nav-item { color: rgba(0,0,0,0.45); }
+    .mob-icon { font-size: 19px; line-height: 1; }
     .mob-nav-item.active { color: var(--accent); }
+    .mob-nav-item:not(.active) { color: rgba(255,255,255,0.5); }
+    [data-theme="light"] .mob-nav-item:not(.active) { color: rgba(0,0,0,0.45); }
     .mob-nav-item:active { opacity: 0.7; }
 
     /* ══════════════════════════════════════════════════════
        MAIN CONTENT
     ══════════════════════════════════════════════════════ */
-    .main { padding: 44px 52px; max-width: 900px; position: relative; }
+    .main { padding: 48px 52px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; }
 
     /* Sections */
     .section { display: none; }
@@ -349,6 +338,61 @@
     }
     .tag:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* Projects — top row with number + github */
+    .pc-top-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2px;
+    }
+    .pc-num {
+      font-family: var(--mono); font-size: 10px; color: var(--text3);
+      letter-spacing: 1px;
+    }
+    .pc-gh-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--mono); font-size: 10px; color: var(--text3);
+      text-decoration: none; padding: 3px 8px; border-radius: 5px;
+      border: 1px solid var(--border); background: var(--bg3);
+      transition: all 0.18s;
+    }
+    .pc-gh-link:hover { color: var(--accent); border-color: rgba(0,229,168,0.35); background: rgba(0,229,168,0.06); }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text2); background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 5px 13px; cursor: pointer;
+      transition: all 0.18s;
+    }
+    .filter-btn:hover { color: var(--text); border-color: rgba(0,229,168,0.25); }
+    .filter-btn.active { color: var(--accent); border-color: rgba(0,229,168,0.4); background: rgba(0,229,168,0.07); }
+    .fb-count {
+      background: var(--bg); border-radius: 9px; padding: 0px 5px;
+      font-size: 9px; color: var(--text3); min-width: 16px; text-align: center;
+    }
+    .filter-btn.active .fb-count { background: var(--accent); color: var(--bg); }
+    .project-card.hidden { display: none; }
+
+    /* Resume button */
+    .resume-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--bg); background: var(--accent);
+      border: none; border-radius: 6px;
+      padding: 5px 14px; cursor: pointer; text-decoration: none;
+      transition: all 0.2s; flex-shrink: 0; font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .resume-btn:hover { background: #00cf96; box-shadow: 0 0 14px rgba(0,229,168,0.35); }
+    .resume-btn svg { flex-shrink: 0; }
+
     /* Projects */
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .project-card {
@@ -423,8 +467,8 @@
       .mobile-topbar  { display: flex; }
       .mobile-nav     { display: block; }
 
-      .shell { grid-template-columns: 1fr; }
-      .main  { padding: 70px 16px calc(var(--mobile-nav-h) + 18px); max-width: 100%; }
+      .shell { flex-direction: column; }
+      .main  { padding: 70px 16px calc(var(--mobile-nav-h) + 18px); max-width: 100%; margin: 0; }
 
       .projects-grid,
       .about-grid,
@@ -452,10 +496,16 @@
 <!-- Mobile Top Bar -->
 <header class="mobile-topbar">
   <div class="mobile-logo">RBJ / portfolio</div>
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <span id="mThemeIcon">☀️</span>
-    <span id="mThemeLabel">light</span>
-  </button>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="font-size:10px;padding:4px 10px;">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      résumé
+    </a>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span id="mThemeIcon">☀️</span>
+      <span id="mThemeLabel">light</span>
+    </button>
+  </div>
 </header>
 
 <!-- Mobile Bottom Nav -->
@@ -485,21 +535,11 @@
 <!-- Shell -->
 <div class="shell">
 
-  <!-- Desktop Sidebar -->
+  <!-- Desktop Top Navbar -->
   <aside class="sidebar">
+   <div class="sidebar-inner">
     <div class="logo-row">
       <div class="logo">RBJ<span>/ portfolio</span></div>
-      <button class="theme-toggle" onclick="toggleTheme()">
-        <span id="dThemeIcon">☀️</span>
-        <span id="dThemeLabel">light</span>
-      </button>
-    </div>
-
-    <div class="profile-mini">
-      <div class="avatar">R</div>
-      <div class="profile-name">Mohd Rayyan<br>Bin Mohd Jaweed</div>
-      <div class="profile-role">// Data Scientist Intern</div>
-      <div class="profile-loc">📍 Hyderabad, India</div>
     </div>
 
     <nav class="nav">
@@ -525,21 +565,15 @@
       </div>
     </nav>
 
-    <div class="social-row">
-      <a href="https://github.com/rayyanrbj09" target="_blank" class="social-btn">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/mohd-rayyan-bin-mohd-jaweed" target="_blank" class="social-btn">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        LinkedIn
-      </a>
-    </div>
-
-    <div class="status-bar">
-      <div class="status-dot"></div>
-      Open to opportunities
-    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span id="dThemeIcon">☀️</span>
+      <span id="dThemeLabel">light</span>
+    </button>
+    <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="margin-left:10px;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      résumé
+    </a>
+   </div>
   </aside>
 
   <!-- Main -->
@@ -647,8 +681,35 @@
         <h1 class="section-title">Featured <span class="hl">Projects</span></h1>
         <p class="section-sub">Real-world AI systems developed end-to-end.</p>
       </div>
-      <div class="projects-grid">
-        <div class="project-card">
+
+      <!-- Filter Bar — sits above the cards -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" onclick="filterProjects('all',this)">
+          all() <span class="fb-count" id="fc-all">2</span>
+        </button>
+        <button class="filter-btn" data-filter="ml" onclick="filterProjects('ml',this)">
+          ml() <span class="fb-count" id="fc-ml">2</span>
+        </button>
+        <button class="filter-btn" data-filter="nlp" onclick="filterProjects('nlp',this)">
+          nlp() <span class="fb-count" id="fc-nlp">1</span>
+        </button>
+        <button class="filter-btn" data-filter="cloud" onclick="filterProjects('cloud',this)">
+          cloud() <span class="fb-count" id="fc-cloud">1</span>
+        </button>
+      </div>
+
+      <!-- Project Cards -->
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- Project 01 — SurgiMind -->
+        <div class="project-card" data-tags="ml cloud">
+          <div class="pc-top-row">
+            <span class="pc-num">01</span>
+            <a href="https://github.com/rayyanrbj09/surgimind" target="_blank" class="pc-gh-link" title="View on GitHub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
           <div class="pc-tag">AI · Computer Vision · Healthcare</div>
           <div class="pc-title">SurgiMind — Surgical Tool Detection &amp; AI Platform</div>
           <div class="pc-desc">AI-powered surgical workflow analysis combining medical report detection, surgical tool recognition, and procedural insights.</div>
@@ -663,7 +724,16 @@
             <span class="pc-tech-tag">Computer Vision</span><span class="pc-tech-tag">ML</span>
           </div>
         </div>
-        <div class="project-card">
+
+        <!-- Project 02 — MoodJournal -->
+        <div class="project-card" data-tags="nlp ml">
+          <div class="pc-top-row">
+            <span class="pc-num">02</span>
+            <a href="https://github.com/rayyanrbj09/moodjournal" target="_blank" class="pc-gh-link" title="View on GitHub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
           <div class="pc-tag">AI · NLP · Emotion Detection</div>
           <div class="pc-title">MoodJournal — Voice-based Emotion Recognition</div>
           <div class="pc-desc">Voice-based emotion recognition and mood tracking system with personalized suggestions and mental wellness insights.</div>
@@ -678,7 +748,9 @@
             <span class="pc-tech-tag">Speech Processing</span><span class="pc-tech-tag">APIs</span>
           </div>
         </div>
-      </div>
+
+      </div><!-- /projects-grid -->
+
     </section>
 
     <!-- ═══ EXPERIENCE ═══ -->
@@ -826,6 +898,21 @@
 </div>
 
 <script>
+  /* ─── Project filter ─── */
+  function filterProjects(filter, clicked) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    clicked.classList.add('active');
+    var cards = document.querySelectorAll('#projectsGrid .project-card');
+    cards.forEach(function(card) {
+      var tags = card.dataset.tags || '';
+      if (filter === 'all' || tags.split(' ').indexOf(filter) !== -1) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
   /* ─── Tab switching — keeps desktop sidebar + mobile bottom nav in sync ─── */
   function switchTab(id, clicked) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));

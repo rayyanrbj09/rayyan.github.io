@@ -64,6 +64,8 @@ PROJECTS = [
         "title": "SurgiMind — Surgical Tool Detection & AI Platform",
         "tag": "AI · Computer Vision · Healthcare",
         "color": "teal",
+        "tags": "ml cloud",
+        "github_url": "https://github.com/rayyanrbj09/surgimind",
         "description": (
             "AI-powered surgical workflow analysis system combining medical report detection, "
             "surgical tool recognition, and procedural insights."
@@ -81,6 +83,8 @@ PROJECTS = [
         "title": "MoodJournal — Voice-based Emotion Recognition",
         "tag": "AI · NLP · Emotion Detection",
         "color": "purple",
+        "tags": "nlp ml",
+        "github_url": "https://github.com/rayyanrbj09/moodjournal",
         "description": (
             "Voice-based emotion recognition and mood tracking system that provides "
             "personalized suggestions and mental wellness insights."
