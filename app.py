@@ -84,7 +84,7 @@ PROJECTS = [
         "tag": "AI · NLP · Emotion Detection",
         "color": "purple",
         "tags": "nlp ml",
-        "github_url": "https://github.com/rayyanrbj09/moodjournal",
+        "github_url": "https://github.com/rayyanrbj09/Hackprixx__MoodJournal",
         "description": (
             "Voice-based emotion recognition and mood tracking system that provides "
             "personalized suggestions and mental wellness insights."
