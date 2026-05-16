@@ -27,20 +27,6 @@
       --sidebar-w: 240px;
       --mobile-nav-h: 68px;
     }
-    [data-theme="light"] {
-      --bg:      #f5f4f0;
-      --bg2:     #eceae3;
-      --bg3:     #e0ddd5;
-      --border:  rgba(0,0,0,0.09);
-      --text:    #18182a;
-      --text2:   #4a4a62;
-      --text3:   #9090a8;
-      --accent:  #00826a;
-      --accent2: #5b21b6;
-      --tag-bg:  rgba(0,130,106,0.08);
-      --card:    #e8e5dd;
-      --glow:    0 0 24px rgba(0,130,106,0.10);
-    }
 
     /* ── Reset ─────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,7 +52,6 @@
       z-index: 0;
       transition: opacity 0.3s;
     }
-    [data-theme="light"] body::before { opacity: 0.15; }
 
     /* ── Shell ─────────────────────────────────────────────────────── */
     .shell {
@@ -90,9 +75,6 @@
       border-bottom: 1px solid var(--border);
       z-index: 100;
       transition: background 0.3s, border-color 0.3s;
-    }
-    [data-theme="light"] .sidebar {
-      background: rgba(245,244,240,0.88);
     }
     .sidebar-inner {
       max-width: 1100px;
@@ -126,25 +108,6 @@
       margin-left: 6px;
       letter-spacing: 0.4px;
     }
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 10px;
-      color: var(--text2);
-      font-family: var(--mono);
-      transition: all 0.2s;
-      white-space: nowrap;
-      margin-left: auto;
-      flex-shrink: 0;
-    }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-
     /* Profile mini card — hidden on desktop navbar */
     .profile-mini { display: none; }
     .avatar { display: none; }
@@ -166,7 +129,8 @@
       user-select: none;
       white-space: nowrap;
     }
-    .nav-item .ni-icon { font-size: 13px; flex-shrink: 0; }
+    .nav-item .ni-icon { display: inline-flex; align-items: center; flex-shrink: 0; }
+    .nav-item .ni-icon svg { display: block; }
     .ni-badge {
       background: var(--bg3);
       border-radius: 9px; padding: 1px 6px;
@@ -221,11 +185,10 @@
       border: none; background: none;
       -webkit-tap-highlight-color: transparent;
     }
-    [data-theme="light"] .mob-nav-item { color: rgba(0,0,0,0.45); }
-    .mob-icon { font-size: 19px; line-height: 1; }
+    .mob-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .mob-icon svg { display: block; }
     .mob-nav-item.active { color: var(--accent); }
     .mob-nav-item:not(.active) { color: rgba(255,255,255,0.5); }
-    [data-theme="light"] .mob-nav-item:not(.active) { color: rgba(0,0,0,0.45); }
     .mob-nav-item:active { opacity: 0.7; }
 
     /* ══════════════════════════════════════════════════════
@@ -300,6 +263,24 @@
       animation: blink 1s infinite; margin-left: 1px;
     }
     @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+    /* Hero profile row */
+    .hero-profile-row {
+      display: flex; align-items: center; gap: 18px; margin-bottom: 22px;
+    }
+    .hero-avatar {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--sans); font-size: 28px; font-weight: 700; color: #fff;
+      border: 2px solid rgba(0,229,168,0.3);
+      overflow: hidden;
+    }
+    .hero-avatar img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    }
+    .hero-avatar-text { line-height: 1; }
+    .hero-title-wrap { flex: 1; min-width: 0; }
 
     /* About grid */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 20px; }
@@ -451,11 +432,14 @@
     .cert-issuer { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 3px; }
 
     /* Contact */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-bottom: 20px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; margin-bottom: 20px; }
     .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; transition: border-color 0.2s, box-shadow 0.2s; }
     .contact-card:hover { border-color: rgba(0,229,168,0.28); box-shadow: var(--glow); }
     .contact-card a { text-decoration: none; color: inherit; display: block; }
-    .cc-icon  { font-size: 18px; margin-bottom: 8px; }
+    .cc-icon  { display: flex; align-items: center; margin-bottom: 10px; line-height: 1; }
+    .cc-icon svg { display: block; }
+    /* GitHub icon inherits theme text color */
+    .contact-card:nth-child(2) .cc-icon svg { color: var(--text); }
     .cc-label { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; }
     .cc-value { font-size: 12px; color: var(--accent); word-break: break-all; }
 
@@ -469,6 +453,9 @@
 
       .shell { flex-direction: column; }
       .main  { padding: 70px 16px calc(var(--mobile-nav-h) + 18px); max-width: 100%; margin: 0; }
+
+      .hero-avatar { width: 54px; height: 54px; font-size: 20px; }
+      .hero-profile-row { gap: 13px; margin-bottom: 16px; }
 
       .projects-grid,
       .about-grid,
@@ -487,7 +474,6 @@
     @media (max-width: 380px) {
       .hero-title, .section-title { font-size: 22px; }
       .mob-nav-item { font-size: 8px; }
-      .mob-icon { font-size: 15px; }
     }
   </style>
 </head>
@@ -496,38 +482,32 @@
 <!-- Mobile Top Bar -->
 <header class="mobile-topbar">
   <div class="mobile-logo">RBJ / portfolio</div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="font-size:10px;padding:4px 10px;">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      résumé
-    </a>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span id="mThemeIcon">☀️</span>
-      <span id="mThemeLabel">light</span>
-    </button>
-  </div>
+  <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="font-size:10px;padding:4px 10px;">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    résumé
+  </a>
 </header>
 
 <!-- Mobile Bottom Nav -->
 <nav class="mobile-nav">
   <div class="mobile-nav-inner">
     <button class="mob-nav-item active" onclick="switchTab('about',this)" data-tab="about">
-      <span class="mob-icon">⌂</span>about
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></span>about
     </button>
     <button class="mob-nav-item" onclick="switchTab('skills',this)" data-tab="skills">
-      <span class="mob-icon">◈</span>skills
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>skills
     </button>
     <button class="mob-nav-item" onclick="switchTab('projects',this)" data-tab="projects">
-      <span class="mob-icon">◻</span>projects
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>projects
     </button>
     <button class="mob-nav-item" onclick="switchTab('experience',this)" data-tab="experience">
-      <span class="mob-icon">◉</span>exp
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg></span>exp
     </button>
     <button class="mob-nav-item" onclick="switchTab('education',this)" data-tab="education">
-      <span class="mob-icon">◎</span>edu
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg></span>edu
     </button>
     <button class="mob-nav-item" onclick="switchTab('contact',this)" data-tab="contact">
-      <span class="mob-icon">◌</span>contact
+      <span class="mob-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>contact
     </button>
   </div>
 </nav>
@@ -544,32 +524,28 @@
 
     <nav class="nav">
       <div class="nav-item active" onclick="switchTab('about',this)" data-tab="about">
-        <span class="ni-icon">⌂</span> about
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></span> about
       </div>
       <div class="nav-item" onclick="switchTab('skills',this)" data-tab="skills">
-        <span class="ni-icon">◈</span> skills
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span> skills
         <span class="ni-badge">10</span>
       </div>
       <div class="nav-item" onclick="switchTab('projects',this)" data-tab="projects">
-        <span class="ni-icon">◻</span> projects
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> projects
         <span class="ni-badge">2</span>
       </div>
       <div class="nav-item" onclick="switchTab('experience',this)" data-tab="experience">
-        <span class="ni-icon">◉</span> experience
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span> experience
       </div>
       <div class="nav-item" onclick="switchTab('education',this)" data-tab="education">
-        <span class="ni-icon">◎</span> education
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg></span> education
       </div>
       <div class="nav-item" onclick="switchTab('contact',this)" data-tab="contact">
-        <span class="ni-icon">◌</span> contact
+        <span class="ni-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> contact
       </div>
     </nav>
 
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span id="dThemeIcon">☀️</span>
-      <span id="dThemeLabel">light</span>
-    </button>
-    <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="margin-left:10px;">
+    <a href="/static/resume.pdf" download="Rayyan_Resume.pdf" class="resume-btn" style="margin-left:auto;">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       résumé
     </a>
@@ -583,10 +559,18 @@
     <section class="section active" id="tab-about">
       <div class="section-header">
         <div class="section-eyebrow">// hello world</div>
-        <h1 class="hero-title" id="heroTitle" aria-label="I'm Rayyan, ML Developer."></h1>
+        <div class="hero-profile-row">
+          <div class="hero-avatar" id="heroAvatar">
+            <img src="/static/profile.jpg" alt="Rayyan" onerror="this.style.display='none';document.getElementById('heroAvatarFallback').style.display='flex';" />
+            <span class="hero-avatar-text" id="heroAvatarFallback" style="display:none;">R</span>
+          </div>
+          <div class="hero-title-wrap">
+            <h1 class="hero-title" id="heroTitle" aria-label="I'm Rayyan, ML Developer."></h1>
+          </div>
+        </div>
         <p class="section-sub">
-          Building real-world AI systems — from data pipelines to production models.
-          Currently interning as a Data Scientist at The Ascent Group.
+          ML engineer who ships end-to-end — from messy CSVs to deployed models on AWS.
+          Currently interning at <strong style="color:var(--text);font-weight:600;">The Ascent Group</strong>, building financial AI pipelines.
         </p>
       </div>
 
@@ -624,6 +608,10 @@
         <div class="info-card">
           <div class="ic-label">Email</div>
           <div class="ic-value"><a href="mailto:rayyan.rbj0409@gmail.com">rayyan.rbj0409@gmail.com</a></div>
+        </div>
+        <div class="info-card" style="grid-column: 1 / -1; border-color: rgba(0,229,168,0.2); background: rgba(0,229,168,0.04);">
+          <div class="ic-label" style="color:var(--accent);">⚡ Currently Building</div>
+          <div class="ic-value">Scalable ML inference pipelines with AWS SageMaker &amp; FastAPI — exploring LLM fine-tuning and retrieval-augmented generation (RAG)</div>
         </div>
       </div>
     </section>
@@ -849,28 +837,41 @@
       <div class="contact-grid">
         <div class="contact-card">
           <a href="mailto:rayyan.rbj0409@gmail.com">
-            <div class="cc-icon">✉️</div>
+            <div class="cc-icon">
+              <!-- Gmail logo -->
+              <svg width="28" height="28" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/>
+                <path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/>
+                <polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/>
+                <path fill="#c62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0 C4.924,8,3,9.924,3,12.298z"/>
+                <path fill="#fbc02d" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z"/>
+              </svg>
+            </div>
             <div class="cc-label">Email</div>
             <div class="cc-value">rayyan.rbj0409@gmail.com</div>
           </a>
         </div>
         <div class="contact-card">
-          <a href="tel:+918106931514">
-            <div class="cc-icon">📞</div>
-            <div class="cc-label">Phone</div>
-            <div class="cc-value">+91 8106931514</div>
-          </a>
-        </div>
-        <div class="contact-card">
           <a href="https://github.com/rayyanrbj09" target="_blank">
-            <div class="cc-icon">⌥</div>
+            <div class="cc-icon">
+              <!-- GitHub logo -->
+              <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
             <div class="cc-label">GitHub</div>
             <div class="cc-value">rayyanrbj09</div>
           </a>
         </div>
         <div class="contact-card">
           <a href="https://www.linkedin.com/in/mohd-rayyan-bin-mohd-jaweed" target="_blank">
-            <div class="cc-icon">◈</div>
+            <div class="cc-icon">
+              <!-- LinkedIn logo -->
+              <svg width="28" height="28" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+                <rect width="72" height="72" rx="8" fill="#0077B5"/>
+                <path fill="#fff" d="M13.5 26h9v33h-9zM18 22a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zM59 59h-9V43.5c0-3.7-1.4-5.5-4.1-5.5-3 0-4.9 2-4.9 5.5V59h-9V26h9v4c1.4-2.6 4.3-4.5 7.9-4.5C55 25.5 59 29.2 59 37V59z"/>
+              </svg>
+            </div>
             <div class="cc-label">LinkedIn</div>
             <div class="cc-value">mohd-rayyan-bin-mohd-jaweed</div>
           </a>
@@ -924,19 +925,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (id === 'about') runHeroAnim();
-  }
-
-  /* ─── Theme toggle — syncs both toggle buttons ─── */
-  function toggleTheme() {
-    const html   = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-
-    const icon  = isDark ? '🌙' : '☀️';
-    const label = isDark ? 'dark' : 'light';
-
-    ['dThemeIcon','mThemeIcon'].forEach(id => { var e = document.getElementById(id); if(e) e.textContent = icon; });
-    ['dThemeLabel','mThemeLabel'].forEach(id => { var e = document.getElementById(id); if(e) e.textContent = label; });
   }
 
   /* ─── Hero word-by-word animation ─── */
