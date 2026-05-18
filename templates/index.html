@@ -360,6 +360,7 @@
     }
     .filter-btn.active .fb-count { background: var(--accent); color: var(--bg); }
     .project-card.hidden { display: none; }
+    .skill-group.hidden { display: none; }
 
     /* Resume button */
     .resume-btn {
@@ -623,31 +624,53 @@
         <h1 class="section-title">Tech <span class="hl">Stack</span></h1>
         <p class="section-sub">Tools and technologies I work with across the ML lifecycle.</p>
       </div>
-      <div class="skills-grid">
-        <div class="skill-group">
+      <!-- Skills Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" onclick="filterSkills('all',this)">
+          all() <span class="fb-count" id="sk-all">7</span>
+        </button>
+        <button class="filter-btn" data-filter="programming" onclick="filterSkills('programming',this)">
+          programming() <span class="fb-count" id="sk-programming">1</span>
+        </button>
+        <button class="filter-btn" data-filter="data" onclick="filterSkills('data',this)">
+          data() <span class="fb-count" id="sk-data">2</span>
+        </button>
+        <button class="filter-btn" data-filter="ml" onclick="filterSkills('ml',this)">
+          ml() <span class="fb-count" id="sk-ml">2</span>
+        </button>
+        <button class="filter-btn" data-filter="cloud" onclick="filterSkills('cloud',this)">
+          cloud() <span class="fb-count" id="sk-cloud">1</span>
+        </button>
+        <button class="filter-btn" data-filter="frameworks" onclick="filterSkills('frameworks',this)">
+          frameworks() <span class="fb-count" id="sk-frameworks">1</span>
+        </button>
+      </div>
+
+      <div class="skills-grid" id="skillsGrid">
+        <div class="skill-group" data-category="programming">
           <div class="sg-title">Programming &amp; Core</div>
           <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Jupyter Notebook</span></div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="data">
           <div class="sg-title">Data Analysis</div>
           <div class="tags"><span class="tag">Pandas</span><span class="tag">Polars</span><span class="tag">NumPy</span></div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="ml">
           <div class="sg-title">ML &amp; AI</div>
           <div class="tags"><span class="tag">Scikit-learn</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Transformers</span></div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="ml">
           <div class="sg-title">Deep Learning</div>
           <div class="tags"><span class="tag">CNNs</span><span class="tag">RNNs</span><span class="tag">Transformers</span></div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="data">
           <div class="sg-title">Visualization &amp; Statistics</div>
           <div class="tags">
             <span class="tag">Matplotlib</span><span class="tag">Seaborn</span><span class="tag">EDA</span>
             <span class="tag">Feature Engineering</span><span class="tag">Hypothesis Testing</span><span class="tag">Outlier Detection</span>
           </div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="cloud">
           <div class="sg-title">Cloud &amp; DevOps</div>
           <div class="tags">
             <span class="tag">AWS S3</span><span class="tag">EC2</span><span class="tag">SageMaker</span>
@@ -655,7 +678,7 @@
             <span class="tag">Git</span><span class="tag">GitHub</span>
           </div>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-category="frameworks">
           <div class="sg-title">Frameworks &amp; Databases</div>
           <div class="tags"><span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span></div>
         </div>
@@ -910,6 +933,25 @@
         card.classList.remove('hidden');
       } else {
         card.classList.add('hidden');
+      }
+    });
+  }
+
+  /* ─── Skills filter ─── */
+  function filterSkills(filter, clicked) {
+    document.querySelectorAll('#skillsGrid').forEach(function(grid) {
+      grid.previousElementSibling.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    });
+    // Remove active from all skills filter buttons
+    document.querySelectorAll('#tab-skills .filter-btn').forEach(b => b.classList.remove('active'));
+    clicked.classList.add('active');
+    var groups = document.querySelectorAll('#skillsGrid .skill-group');
+    groups.forEach(function(group) {
+      var cat = group.dataset.category || '';
+      if (filter === 'all' || cat === filter) {
+        group.classList.remove('hidden');
+      } else {
+        group.classList.add('hidden');
       }
     });
   }
